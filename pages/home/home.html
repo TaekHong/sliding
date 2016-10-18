@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+  <button ion-button (click)='addWeather()'>Add</button>
+    </ion-buttons>
+    <ion-title>
+    Weather Service
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <!-- <ion-refresher (ionRefresh)='refreshHandler($event)'>
+      <ion-refresher-content>
+      </ion-refresher-content>
+  </ion-refresher> -->
+
+<ion-list>
+  <ion-slides [options]="myslideoptions">
+    <ion-slide>
+  <!-- <ion-item-sliding> -->
+  <!-- <ion-item *ngFor="let weather of weatherList"> -->
+  <button ion-item *ngIf="localWeather" (click)='viewForcast(localWeather)'>
+  <ion-thumbnail item-left>
+      <img src = "{{'http://openweathermap.org/img/w/'+localWeather.weather[0].icon+'.png'}}" height=100>
+  </ion-thumbnail>
+  <h2>{{localWeather.main.temp}}</h2>
+  <h3>{{localWeather.name}}</h3>
+  <p> Low: {{localWeather.main.temp_min}} High: {{localWeather.main.temp_max}}</p>
+    <p> Lon: {{localWeather.coord.lon}}, Lat: {{localWeather.coord.lat}}</p>
+  </button>
+  <ion-item-options>
+    <button ion-button icon-only (click)='remove(weather)'>
+      <ion-icon name='trash'></ion-icon></button>
+  </ion-item-options>
+</ion-slide>
+
+<ion-slide *ngFor="let weather of weatherList">
+
+    <ion-thumbnail item-left>
+        <img src = "{{'http://openweathermap.org/img/w/'+weather.weather[0].icon+'.png'}}" height=100>
+    </ion-thumbnail>
+    <h2>{{weather.main.temp}}</h2>
+    <h3>{{weather.name}}</h3>
+    <p> Low: {{weather.main.temp_min}} High: {{weather.main.temp_max}}</p>
+<!--
+    <ion-item ion-item *ngFor="let weather of weatherList">
+      <ion-thumbnail item-left>
+        <img src="{{'http://openweathermap.org/img/w/'+weather.weather[0].icon+'.png'}}">
+      </ion-thumbnail>
+      <h2>{{weather.dt*1000 | date: 'EEEE'}}</h2>
+      <h3>High: {{weather.temp.max}}</h3>
+      <p> Low: {{weather.temp.min}}</p>
+    </ion-item>
+-->
+    <button ion-button (click)='remove(weather)'>delete here</button>
+
+
+
+
+</ion-slide>
+
+
+</ion-slides>
+</ion-list>
+</ion-content>
